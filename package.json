@@ -1,6 +1,6 @@
 {
-    "homepage": "https://srnitish.github.com/characters",
-    "name": "characters",
+    "homepage": "https://srnitish.github.com/characters/",
+    "name": "character",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

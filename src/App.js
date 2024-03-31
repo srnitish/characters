@@ -23,8 +23,8 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" exact Component={Characters}/>
-          <Route path="/character/:id" Component={CharacterDetails}/>
+          <Route exact path="/characters" element={<Characters/>}/>
+          <Route exact path="/character/:id" element={<CharacterDetails/>}/>
         </Routes>
       </div>
     </Router>
