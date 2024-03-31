@@ -10,6 +10,7 @@ function CharacterDetails() {
     const characterIndex = Characters.findIndex(char => char.id === parseInt(id));
 
     useEffect(()=>{
+         // **** Using Axios ****
         const fetchCharacter = async() => {
             try{
                 const response = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
@@ -20,7 +21,6 @@ function CharacterDetails() {
             }
 
             try {
-                // **** Using Axios ****
                 const response = await axios.get('https://rickandmortyapi.com/api/character');
                 const data = response.data.results;
                 console.log(data);
@@ -51,13 +51,12 @@ function CharacterDetails() {
     if(!character){
         return <div><center>Loading...</center></div>;
     }
-
     return (
         <div className="container-fluid">
             <div className="row">
             <h1>Characters Details</h1>
                 <div className="col-lg-3 col-md-3 col-sm-4">
-                <Link to="/">
+                <Link to="/Characters/">
                     <button className="btn btn-outline-secondary" style={{marginRight: `10px`}}>Home</button>
                 </Link>
                 <button className="btn btn-outline-primary" onClick={goToPreviousCharacter}>Previous</button>
@@ -75,7 +74,6 @@ function CharacterDetails() {
                                 <p className="card-title"><strong>Location:</strong> {character.location.name}</p>
                                 </div>
                                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                
                             </div>
                         </div>
                     </div>

@@ -2,14 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-// const myPara = {
-//     display: "inline-flex",
-// }
-
 const Characters = () => {
     const [Characters, setCharacters] = useState([]);
-    // const [selectedCharacter, setSelectedChar] = useState(null);
-    // const [deletedItems, setDeletedItems] = useState([]);
 
     useEffect(() => {
         const fetchCharacters = async() => {
@@ -26,21 +20,6 @@ const Characters = () => {
         fetchCharacters();
     }, []);
 
-    // const showDetails = (url) => {
-    //     axios.get(url)
-    //       .then(response => {
-    //         const selectedChar = response.data;
-    //         console.log("selChar is:", selectedChar);
-    //         setSelectedChar(selectedChar);
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching character details:', error);
-    //       });
-    //   };
-
-    //   const getStatusColor = status => {
-    //     return status === 'Alive' ? 'green' : 'red';
-    //   };
     if(!Characters){
         return <div>Loading...</div>
     }
@@ -65,9 +44,9 @@ const Characters = () => {
                                         <button className='btn btn-outline-warning text-dark'>Character Details</button>
                                     </Link>
                                 </div>
-                                </div>
                             </div>
-                        </div>  
+                        </div>
+                    </div>  
                  ))}
            </div>
         </div>
