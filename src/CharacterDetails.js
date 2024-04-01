@@ -32,6 +32,7 @@ function CharacterDetails() {
         fetchCharacter();
     },[id])
 
+    // For Previous & Next Functionality
     const goToPreviousCharacter = () => {
         // const previousIndex = characterIndex - 1;
         // const previousCharacterId = previousIndex >= 0 ? Characters[previousIndex].id : Characters[Characters.length - 1].id;
