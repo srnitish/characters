@@ -52,6 +52,7 @@ function CharacterDetails() {
     if(!character){
         return <div><center>Loading...</center></div>;
     }
+    
     return (
         <div className="container-fluid">
             <div className="row">
