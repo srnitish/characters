@@ -1,81 +1,70 @@
-import React,{useEffect, useState} from 'react';
-import axios from 'axios';
+import React,{useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCharacterById } from './redux/slice/characterSlices';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 function CharacterDetails() {
-    const [character, setCharacter] = useState(null);
-    const [Characters, setCharacters] = useState([]);
+
+    const {error, loading, currentCharacter} = useSelector(state => state.character);
+    console.log("currentCharacter",currentCharacter);
+    const dispatch = useDispatch();
     const {id} = useParams();
     const navigate = useNavigate();
-    const characterIndex = Characters.findIndex(char => char.id === parseInt(id));
 
     useEffect(()=>{
-         // **** Using Axios ****
-        const fetchCharacter = async() => {
-            try{
-                const response = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
-                const result = response.data;
-                setCharacter(result);
-            }catch(error){
-                console.error('Error fetching characters:', error)
-            }
+    dispatch(fetchCharacterById(id));
+    },[dispatch, id])
 
-            try {
-                const response = await axios.get('https://rickandmortyapi.com/api/character');
-                const data = response.data.results;
-                console.log(data);
-                setCharacters(data);
-            }catch(error){
-                console.error('Error fetching characters:', error)
-            }
-        }
-        fetchCharacter();
-    },[id])
-
-    // For Previous & Next Functionality
-    const goToPreviousCharacter = () => {
-        // const previousIndex = characterIndex - 1;
-        // const previousCharacterId = previousIndex >= 0 ? Characters[previousIndex].id : Characters[Characters.length - 1].id;
-        if(characterIndex > 0){
-            const previousCharacterId = Characters[characterIndex -1].id
-            navigate(`/character/${previousCharacterId}`);
-        }
+    const handlePrevious = () => {
+        const previousId = currentCharacter.id - 1;
+        dispatch(fetchCharacterById(previousId));
+        navigate(`/character/${previousId}`);
       };
     
-      const goToNextCharacter = () => {
-        const nextIndex = characterIndex + 1;
-        const nextCharacterId = nextIndex < Characters.length ? Characters[nextIndex].id : Characters[0].id;
-        navigate(`/character/${nextCharacterId}`);
+      const handleNext = () => {
+        const nextId = currentCharacter.id + 1;
+        dispatch(fetchCharacterById(nextId));
+        navigate(`/character/${nextId}`);
       };
     
 
-    if(!character){
+    if(loading){
         return <div><center>Loading...</center></div>;
     }
-    
+
+    if(error){
+        return <div>Error: {error}</div>
+    }
+
+    if(!currentCharacter){
+        return null;
+    }
+
     return (
         <div className="container-fluid">
             <div className="row">
             <h1>Characters Details</h1>
                 <div className="col-lg-3 col-md-3 col-sm-4">
-                <Link to="/Characters/">
+                <Link to="/characters/">
                     <button className="btn btn-outline-secondary" style={{marginRight: `10px`}}>Home</button>
                 </Link>
-                <button className="btn btn-outline-primary" onClick={goToPreviousCharacter}>Previous</button>
-                <button className="btn btn-outline-primary" style={{marginLeft: `10px`}} onClick={goToNextCharacter}>Next</button>
-                    <div key={character.id} className="col-lg-12 mt-5 mb-3">
+                    <button className='btn btn-outline-primary' onClick={handlePrevious}>Previous</button>
+                    <button className='btn btn-outline-primary' style={{marginLeft: `10px`}} onClick={handleNext}>Next</button>
+                   
+                    <div key={currentCharacter.id} className="col-lg-12 mt-5 mb-3">
                         <div className="card profile-card-5">
                             <div className="card-img-block">
-                                <img className="card-img-top" src={character.image} alt={character.image} width={100} />
+                                <img className="card-img-top" src={currentCharacter.image} alt={currentCharacter.image} width={100} />
                             </div>
                             <div className="card-body pt-0">
-                                <div><h6 className="card-title">{character.name}</h6></div>
-                                <div> <span className={character.status === 'Alive' ? 'alive' : character.status === 'Dead' ? 'dead' : character.status === 'unknown' ? 'unknown' : ''}>{' '}</span>{character.status}, <span>{character.gender}</span></div>
+                                <div><h6 className="card-title">{currentCharacter.name}</h6></div>
+                                <div> <span className={currentCharacter.status === 'Alive' ? 'alive' : currentCharacter.status === 'Dead' ? 'dead' : currentCharacter.status === 'unknown' ? 'unknown' : ''}>{' '}</span>{currentCharacter.status}, <span>{currentCharacter.gender}</span></div>
                                 <div>
-                                <p className="card-title"><strong>Origin:</strong> {character.origin.name}</p>
-                                <p className="card-title"><strong>Location:</strong> {character.location.name}</p>
+                                <p className="card-title"><strong>Origin:</strong> {currentCharacter.origin.name}</p>
+                                <p className="card-title"><strong>Location:</strong> {currentCharacter.location.name}</p>
                                 </div>
                                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                
                             </div>
                         </div>
                     </div>

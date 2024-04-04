@@ -1,34 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllCharacter } from './redux/slice/characterSlices';
 import { Link } from 'react-router-dom';
 
 const Characters = () => {
-    const [Characters, setCharacters] = useState([]);
+    const dispatch =  useDispatch();
+    const characters = useSelector((state) => state.character.data);
+    console.log("character",characters);
 
     useEffect(() => {
-        const fetchCharacters = async() => {
-            try {
-                // **** Using Axios ****
-                const response = await axios.get('https://rickandmortyapi.com/api/character');
-                const data = response.data.results;
-                console.log(data);
-                setCharacters(data);
-            }catch(error){
-                console.error('Error fetching characters:', error)
-            }
-        };
-        fetchCharacters();
+        dispatch(fetchAllCharacter());
+        // const fetchCharacters = async() => {
+        //     try {
+        //         // **** Using Axios ****
+        //         const response = await axios.get('https://rickandmortyapi.com/api/character');
+        //         const data = response.data.results;
+        //         console.log(data);
+        //         setCharacters(data);
+        //     }catch(error){
+        //         console.error('Error fetching characters:', error)
+        //     }
+        // };
+        // fetchCharacters();
     }, []);
 
-    if(!Characters){
-        return <div>Loading...</div>
+    if(!characters){
+        return <div>Loading....</div>
     }
-    
-      return (
+      return (   
         <div className="container-fluid">
             <div className="row">
             <h1>Rick and Morty Characters</h1>
-                {Characters.map(character => (
+                {characters.map(character => (
                     <div className="col-lg-3 col-md-3 col-sm-4">
                         <div key={character.id} className="col-lg-12 mt-5 mb-3">
                             <div className="card profile-card-5">
