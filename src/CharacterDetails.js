@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCharacterById } from './redux/slice/characterSlices';
+import { fetchAllCharacter, fetchCharacterById } from './redux/slice/characterSlices';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 function CharacterDetails() {
@@ -44,6 +44,7 @@ function CharacterDetails() {
         <div className="container-fluid">
             <div className="row">
             <h1>Characters Details</h1>
+
                 <div className="col-lg-3 col-md-3 col-sm-4">
                 <Link to="/characters/">
                     <button className="btn btn-outline-secondary" style={{marginRight: `10px`}}>Home</button>
@@ -51,6 +52,7 @@ function CharacterDetails() {
                     <button className='btn btn-outline-primary' onClick={handlePrevious}>Previous</button>
                     <button className='btn btn-outline-primary' style={{marginLeft: `10px`}} onClick={handleNext}>Next</button>
                    
+              
                     <div key={currentCharacter.id} className="col-lg-12 mt-5 mb-3">
                         <div className="card profile-card-5">
                             <div className="card-img-block">

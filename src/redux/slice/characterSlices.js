@@ -6,8 +6,6 @@ export const fetchAllCharacter = createAsyncThunk('fetchAllCharacter', async() =
         const response = await axios.get(`https://rickandmortyapi.com/api/character`);
         const data = response.data.results;
         return data;
-        // console.log(data);
-
     } catch (error) {
         console.log("Error", error);
     }
@@ -18,8 +16,6 @@ export const fetchCharacterById = createAsyncThunk('fetchCharacterById', async(i
         const response = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
         const data = response.data;
         return data;
-        // console.log(data);
-
     } catch (error) {
         console.log("Error", error);
     }
@@ -31,7 +27,7 @@ const characterSlice = createSlice({
         loading: false,
         data: null,
         error: false,
-        currentCharacter: null,
+        currentCharacter: null
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllCharacter.pending, (state, action) => {
@@ -49,6 +45,7 @@ const characterSlice = createSlice({
 
         builder.addCase(fetchCharacterById.pending, (state, action) => {
             state.loading = true;
+            state.currentCharacter = action.payload;
             state.error = null;
         });
         builder.addCase(fetchCharacterById.fulfilled, (state, action) => {
