@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -98,4 +100,20 @@ ul>p {
     border-radius: 50%;
     display: inline-flex;
     margin-right: 5px;
+}
+
+.centerError {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    color: red;
+    font-weight: 600;
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    height: 80vh;
+    justify-content: center;
 }
