@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPost, setPage } from "./redux/slice/postSlice";
 // import imageLoader from './loader.gif';
 
-function CryptoCoin() {
+function Post() {
   const dispatch = useDispatch();
   const { data, loading, page, hasMore } = useSelector((state) => state.post);
 
@@ -55,4 +55,4 @@ function CryptoCoin() {
   );
 }
 
-export default CryptoCoin;
+export default Post;
