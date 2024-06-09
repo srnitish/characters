@@ -7,7 +7,7 @@ const CharacterDetails = React.lazy(() => import('./CharacterDetails'));
 
 function App() {
   return (
-    <Router>
+    <Router basename="/srnitish.github.io">
       <Routes>
         <Route path="/characters" element={<Characters />} />
         <Route path="/post" element={<Post />} />
