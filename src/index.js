@@ -19,8 +19,8 @@ root.render(
   </React.StrictMode>
 );
 
-const cities = ["Gorakhpur", "Lucknow", "Agra" , "Lucknow", "Agra"];
-const result = cities.filter((element, index) => cities.indexOf(element) == index);
+// const cities = ["Gorakhpur", "Lucknow", "Agra" , "Lucknow", "Agra"];
+// const result = cities.filter((element, index) => cities.indexOf(element) == index);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

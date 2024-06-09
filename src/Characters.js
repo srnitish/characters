@@ -7,7 +7,7 @@ import imageLoader from './loader.gif'
 const Characters = () => {
     const dispatch =  useDispatch();
     const {loading, error, data} = useSelector((state) => state.character);
-    console.log("character",data);
+    // console.log("character",data);
 
     useEffect(() => {
         dispatch(fetchAllCharacter())
@@ -17,12 +17,8 @@ const Characters = () => {
       return ( 
         <div className="container-fluid mt-5">
             <h1 className='text-center'>Rick & Morty Characters</h1>
-            {loading ? (
-                <div className='text-center loader'><img src={imageLoader} alt='loader' width={80} height={80}/></div>
-                ) : 
-            !data ? (
-                <div className='centerError'>{error}</div>
-                ) : (
+            {loading ? (<div className='text-center loader'><img src={imageLoader} alt='loader' width={80} height={80}/></div>) : 
+            !data ? (<div className='centerError'>{error}</div>) : (
                 <div className="row">
                     {data.map(character => (
                             <div key={character.id} className="col-lg-3 col-md-3 col-sm-4">

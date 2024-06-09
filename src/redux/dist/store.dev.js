@@ -13,6 +13,8 @@ var _storage = _interopRequireDefault(require("redux-persist/lib/storage"));
 
 var _characterSlices = _interopRequireDefault(require("./slice/characterSlices"));
 
+var _postSlice = _interopRequireDefault(require("./slice/postSlice"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // defaults to localStorage for web
@@ -24,6 +26,7 @@ var persistedReducer = (0, _reduxPersist.persistReducer)(persistConfig, _charact
 var store = (0, _toolkit.configureStore)({
   reducer: {
     character: _characterSlices["default"],
+    post: _postSlice["default"],
     persistor: persistedReducer
   }
 });
