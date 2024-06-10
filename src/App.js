@@ -1,18 +1,20 @@
-import React, { Suspense } from 'react';
+import React, { Suspense,lazy } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Post from './Post';
-import Characters from './Characters';
-const CharacterDetails = React.lazy(() => import('./CharacterDetails'));
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+const Post = lazy(()=> import('./Post'));
+const Characters = lazy(()=> import('./Characters'));
+const CharacterDetails = lazy(() => import('./CharacterDetails'));
 
 function App() {
   return (
-    <Router basename="/srnitish.github.io">
+    <Router>
+    <Suspense fallback={<h6>Loading...</h6>}>
       <Routes>
+        <Route exact path="/post" element={<Post />} />
         <Route path="/characters" element={<Characters />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/character/:id" element={<Suspense fallback={<h6>Loading...</h6>}><CharacterDetails /></Suspense>} />
-      </Routes>
+        <Route path="/character/:id" element={<CharacterDetails />} />
+        </Routes>
+        </Suspense>
     </Router>
   );
 }
